@@ -135,6 +135,18 @@ public class DroneServiceImpl implements DroneService {
         .data(medications).build();
   }
 
+  @Override
+  public ResponseDto checkAvailable() {
+    List<Drone> drones = droneRepository.findByWeightLessThanAndBatteryGreaterThan(
+        Constants.DRONE_MAX_WEIGHT_LIMIT,
+        Constants.DRONE_MIN_BATTERY_LIMIT);
+    List<String> dronesList = drones.stream().map(Drone::getSerialNumber).toList();
+    return ResponseDto.builder()
+        .status(StatusCodes.SUCCESS)
+        .message(dronesList.size() + " " + Messages.DRONE_FOUND)
+        .data(dronesList).build();
+  }
+
   private boolean canLoad(Drone drone, Medication medication) {
     return drone.getWeight() + medication.getWeight() <= Constants.DRONE_MAX_WEIGHT_LIMIT;
   }
