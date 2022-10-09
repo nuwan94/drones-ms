@@ -14,8 +14,7 @@ import org.springframework.stereotype.Service;
 @Transactional
 public class MedicationServiceImpl implements MedicationService {
 
-  final
-  MedicationRepository medicationRepository;
+  final MedicationRepository medicationRepository;
 
   public MedicationServiceImpl(MedicationRepository medicationRepository) {
     this.medicationRepository = medicationRepository;
@@ -34,7 +33,8 @@ public class MedicationServiceImpl implements MedicationService {
           .message(Messages.MEDICATION_EXISTS)
           .build();
     }
-    Medication savedMedication = medicationRepository.save(medicationDto.toEntity());
+    Medication savedMedication =
+        medicationRepository.save(medicationDto.toEntity());
     return ResponseDto.builder()
         .status(StatusCodes.SUCCESS)
         .message(Messages.MEDICATION_SAVED)

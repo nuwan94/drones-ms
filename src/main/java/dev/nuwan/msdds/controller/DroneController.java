@@ -25,8 +25,10 @@ public class DroneController extends BaseController {
   }
 
   @ResponseBody
-  @PostMapping(value = "/register", produces = "application/json", consumes = "application/json")
-  public ResponseEntity<ResponseDto> register(@Valid @RequestBody DroneDto drone) {
+  @PostMapping(value = "/register", produces = "application/json",
+               consumes = "application/json")
+  public ResponseEntity<ResponseDto> register(@Valid
+                                              @RequestBody DroneDto drone) {
     ResponseDto response = droneService.register(drone);
     if (response.getStatus() != 0) {
       return ResponseEntity.badRequest().body(response);
@@ -35,8 +37,10 @@ public class DroneController extends BaseController {
   }
 
   @ResponseBody
-  @PostMapping(value = "/load", produces = "application/json", consumes = "application/json")
-  public ResponseEntity<ResponseDto> loadMedication(@Valid @RequestBody DroneLoadDto droneLoadDto) {
+  @PostMapping(value = "/load", produces = "application/json",
+               consumes = "application/json")
+  public ResponseEntity<ResponseDto>
+  loadMedication(@Valid @RequestBody DroneLoadDto droneLoadDto) {
     ResponseDto response = droneService.loadMedication(droneLoadDto);
     if (response.getStatus() != 0) {
       return ResponseEntity.badRequest().body(response);
@@ -46,12 +50,12 @@ public class DroneController extends BaseController {
 
   @ResponseBody
   @GetMapping(value = "/{serialNumber}", produces = "application/json")
-  public ResponseEntity<ResponseDto> checkMedications(@PathVariable String serialNumber) {
+  public ResponseEntity<ResponseDto>
+  checkMedications(@PathVariable String serialNumber) {
     ResponseDto response = droneService.checkMedications(serialNumber);
     if (response.getStatus() != 0) {
       return ResponseEntity.badRequest().body(response);
     }
     return ResponseEntity.ok(response);
   }
-
 }

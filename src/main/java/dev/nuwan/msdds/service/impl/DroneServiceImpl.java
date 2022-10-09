@@ -23,17 +23,15 @@ import org.springframework.stereotype.Service;
 @Service
 public class DroneServiceImpl implements DroneService {
 
-  final
-  DroneRepository droneRepository;
-  final
-  DroneModelRepository droneModelRepository;
+  final DroneRepository droneRepository;
+  final DroneModelRepository droneModelRepository;
   DroneStateRepository droneStateRepository;
-  final
-  MedicationRepository medicationRepository;
+  final MedicationRepository medicationRepository;
 
   public DroneServiceImpl(DroneRepository droneRepository,
-      DroneModelRepository droneModelRepository, DroneStateRepository droneStateRepository,
-      MedicationRepository medicationRepository) {
+                          DroneModelRepository droneModelRepository,
+                          DroneStateRepository droneStateRepository,
+                          MedicationRepository medicationRepository) {
     this.droneRepository = droneRepository;
     this.droneModelRepository = droneModelRepository;
     this.droneStateRepository = droneStateRepository;
@@ -42,21 +40,24 @@ public class DroneServiceImpl implements DroneService {
 
   @Override
   public ResponseDto register(@Valid DroneDto requestDrone) {
-    Drone droneExist = droneRepository.findBySerialNumber(requestDrone.getSerialNo());
+    Drone droneExist =
+        droneRepository.findBySerialNumber(requestDrone.getSerialNo());
     if (droneExist != null) {
       return ResponseDto.builder()
           .status(StatusCodes.DUPLICATE)
           .message(Messages.DRONE_EXISTS)
           .build();
     }
-    DroneModel droneModel = droneModelRepository.findByName(requestDrone.getModel());
+    DroneModel droneModel =
+        droneModelRepository.findByName(requestDrone.getModel());
     if (droneModel == null) {
       return ResponseDto.builder()
           .status(StatusCodes.INVALID)
           .message(Messages.DRONE_INVALID_MODEL)
           .build();
     }
-    DroneState droneState = droneStateRepository.findByName(requestDrone.getState());
+    DroneState droneState =
+        droneStateRepository.findByName(requestDrone.getState());
     if (droneState == null) {
       return ResponseDto.builder()
           .status(StatusCodes.INVALID)
@@ -64,23 +65,26 @@ public class DroneServiceImpl implements DroneService {
           .build();
     }
     Drone drone = Drone.builder()
-        .serialNumber(requestDrone.getSerialNo())
-        .model(droneModel)
-        .battery(requestDrone.getBattery().doubleValue())
-        .state(droneState)
-        .weight(0.0)
-        .build();
+                      .serialNumber(requestDrone.getSerialNo())
+                      .model(droneModel)
+                      .battery(requestDrone.getBattery().doubleValue())
+                      .state(droneState)
+                      .weight(0.0)
+                      .build();
     Drone savedDrone = droneRepository.save(drone);
     return ResponseDto.builder()
         .status(StatusCodes.SUCCESS)
         .message(Messages.DRONE_REGISTERED)
-        .data(savedDrone).build();
+        .data(savedDrone)
+        .build();
   }
 
   @Override
   public ResponseDto loadMedication(DroneLoadDto droneLoadDto) {
-    Drone droneExist = droneRepository.findBySerialNumber(droneLoadDto.getDroneSerialNo());
-    Medication medicationExist = medicationRepository.findByCode(droneLoadDto.getMedicationCode());
+    Drone droneExist =
+        droneRepository.findBySerialNumber(droneLoadDto.getDroneSerialNo());
+    Medication medicationExist =
+        medicationRepository.findByCode(droneLoadDto.getMedicationCode());
 
     // Check if drone and medication exist in the DB
     if (droneExist == null) {
@@ -105,7 +109,8 @@ public class DroneServiceImpl implements DroneService {
     }
 
     // Update existing drone
-    List<Medication> medicationCollections = new ArrayList<>(droneExist.getMedications());
+    List<Medication> medicationCollections =
+        new ArrayList<>(droneExist.getMedications());
     medicationCollections.add(medicationExist);
     droneExist.setMedications(medicationCollections);
     droneExist.setWeight(droneExist.getWeight() + medicationExist.getWeight());
@@ -121,7 +126,8 @@ public class DroneServiceImpl implements DroneService {
 
   @Override
   public ResponseDto checkMedications(String serialNumber) {
-    List<Medication> medications = droneRepository.findMedicationsBySerialNumber(serialNumber);
+    List<Medication> medications =
+        droneRepository.findMedicationsBySerialNumber(serialNumber);
     if (medications == null) {
       return ResponseDto.builder()
           .status(StatusCodes.NOT_FOUND)
@@ -132,10 +138,12 @@ public class DroneServiceImpl implements DroneService {
     return ResponseDto.builder()
         .status(StatusCodes.SUCCESS)
         .message(Messages.DRONE_FOUND)
-        .data(medications).build();
+        .data(medications)
+        .build();
   }
 
   private boolean canLoad(Drone drone, Medication medication) {
-    return drone.getWeight() + medication.getWeight() <= Constants.DRONE_MAX_WEIGHT_LIMIT;
+    return drone.getWeight() + medication.getWeight() <=
+        Constants.DRONE_MAX_WEIGHT_LIMIT;
   }
 }

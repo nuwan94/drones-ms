@@ -16,5 +16,4 @@ public interface Messages {
   String MEDICATION_DELETE_FAILURE = "Medication delete failed";
   String MEDICATION_EXISTS = "Medication exists";
   String MEDICATION_NOT_EXISTS = "Medication doesn't exists";
-
 }

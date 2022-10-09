@@ -25,7 +25,8 @@ public class MedicationController extends BaseController {
 
   @ResponseBody
   @PostMapping(value = "/")
-  public ResponseEntity<ResponseDto> create(@Valid @RequestBody MedicationDto medication) {
+  public ResponseEntity<ResponseDto>
+  create(@Valid @RequestBody MedicationDto medication) {
     ResponseDto response = medicationService.create(medication);
     if (response.getStatus() != 0) {
       return ResponseEntity.badRequest().body(response);
@@ -42,5 +43,4 @@ public class MedicationController extends BaseController {
     }
     return ResponseEntity.ok(response);
   }
-
 }

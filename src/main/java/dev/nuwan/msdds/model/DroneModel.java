@@ -27,11 +27,7 @@ public class DroneModel {
   @Column(name = "model_id")
   private Long id;
 
-  @Column(unique = true)
-  private String name;
+  @Column(unique = true) private String name;
 
-  @JsonIgnore
-  @OneToMany(mappedBy = "model")
-  private List<Drone> drones;
-
+  @JsonIgnore @OneToMany(mappedBy = "model") private List<Drone> drones;
 }

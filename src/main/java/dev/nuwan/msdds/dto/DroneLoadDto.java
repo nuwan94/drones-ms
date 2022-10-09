@@ -15,12 +15,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class DroneLoadDto implements Serializable {
 
-  @ApiModelProperty(notes = "Serial Number", example = "D101010", required = true)
-  @Size(max = 100, message = "Serial Number length is limited to 100 characters")
+  @ApiModelProperty(notes = "Serial Number", example = "D101010",
+                    required = true)
+  @Size(max = 100,
+        message = "Serial Number length is limited to 100 characters")
   private String droneSerialNo;
 
-  @ApiModelProperty(notes = "Medication Code", example = "LCFUYH", required = true)
+  @ApiModelProperty(notes = "Medication Code", example = "LCFUYH",
+                    required = true)
   @Pattern(regexp = "^[A-Z0-9_]+$")
   private String medicationCode;
-
 }

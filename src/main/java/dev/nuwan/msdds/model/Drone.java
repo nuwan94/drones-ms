@@ -33,12 +33,9 @@ public class Drone {
   @Column(name = "drone_id")
   private Long id;
 
-  @Column(length = 100, unique = true)
-  @NotBlank
-  private String serialNumber;
+  @Column(length = 100, unique = true) @NotBlank private String serialNumber;
 
-  @Column(columnDefinition = "integer default 25")
-  private Double weight;
+  @Column(columnDefinition = "integer default 25") private Double weight;
 
   private Double battery;
 
@@ -52,10 +49,8 @@ public class Drone {
 
   @JsonIgnore
   @ManyToMany(cascade = CascadeType.ALL)
-  @JoinTable(
-      name = "drone_medications",
-      joinColumns = @JoinColumn(name = "drone_id"),
-      inverseJoinColumns = @JoinColumn(name = "medication_id")
-  )
+  @JoinTable(name = "drone_medications",
+             joinColumns = @JoinColumn(name = "drone_id"),
+             inverseJoinColumns = @JoinColumn(name = "medication_id"))
   private List<Medication> medications;
 }

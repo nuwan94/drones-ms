@@ -32,13 +32,11 @@ public class Medication {
 
   private Double weight;
 
-  @Column(unique = true)
-  private String code;
+  @Column(unique = true) private String code;
 
   private String image;
 
   @JsonIgnore
   @ManyToMany(mappedBy = "medications")
   private Collection<Drone> drones;
-
 }
