@@ -3,6 +3,7 @@ package dev.nuwan.msdds.service.impl;
 import dev.nuwan.msdds.constants.Constants;
 import dev.nuwan.msdds.constants.Messages;
 import dev.nuwan.msdds.constants.StatusCodes;
+import dev.nuwan.msdds.dto.DroneAuditDto;
 import dev.nuwan.msdds.dto.DroneDto;
 import dev.nuwan.msdds.dto.DroneLoadDto;
 import dev.nuwan.msdds.dto.ResponseDto;
@@ -169,6 +170,13 @@ public class DroneServiceImpl implements DroneService {
         .status(StatusCodes.SUCCESS)
         .message(Messages.DRONE_FOUND)
         .data(battery).build();
+  }
+
+  @Override
+  public List<DroneAuditDto> getAllBatteryInfo() {
+    List<Drone> droneList = droneRepository.findAll();
+    return droneList.stream()
+        .map(drone -> new DroneAuditDto(drone.getSerialNumber(), drone.getBattery())).toList();
   }
 
   private boolean canLoad(Drone drone, Medication medication) {
