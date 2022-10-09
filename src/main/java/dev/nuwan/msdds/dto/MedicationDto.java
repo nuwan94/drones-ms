@@ -24,7 +24,7 @@ public class MedicationDto {
 
   private Double weight;
 
-  @ApiModelProperty(notes = "Medication Code", example = "ABCD_99", required = true)
+  @ApiModelProperty(notes = "Medication Code", example = "CODE99", required = true)
   @Pattern(regexp = "^[A-Z0-9_]+$")
   private String code;
 
