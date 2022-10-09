@@ -20,7 +20,7 @@ public class DroneLoadDto implements Serializable {
   private String droneSerialNo;
 
   @ApiModelProperty(notes = "Medication Code", example = "LCFUYH", required = true)
-  @Pattern(regexp = "^[A-Z0-9_]+$")
+  @Pattern(regexp = "^[A-Z0-9_]+$", message = "Allowed only upper case letters, underscore and numbers")
   private String medicationCode;
 
 }
