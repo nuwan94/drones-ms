@@ -1,6 +1,5 @@
 package dev.nuwan.msdds.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
@@ -16,8 +15,11 @@ import springfox.documentation.spring.web.plugins.Docket;
 @Configuration
 public class SpringFoxConfig {
 
-  @Autowired
-  private Environment env;
+  private final Environment env;
+
+  public SpringFoxConfig(Environment env) {
+    this.env = env;
+  }
 
   @Bean
   public Docket api() {

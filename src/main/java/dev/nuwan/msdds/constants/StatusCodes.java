@@ -1,11 +1,10 @@
 package dev.nuwan.msdds.constants;
 
-public class StatusCodes {
+public interface StatusCodes {
 
-  public static final Integer SUCCESS = 0;
-  public static final Integer FAILURE = -1;
-
-  public static final Integer DUPLICATE = 101;
-  public static final Integer INVALID = 102;
-  public static final Integer NOT_FOUND = 404;
+  Integer SUCCESS = 0;
+  Integer FAILURE = -1;
+  Integer DUPLICATE = 101;
+  Integer INVALID = 102;
+  Integer NOT_FOUND = 404;
 }

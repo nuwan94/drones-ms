@@ -6,6 +6,7 @@ import dev.nuwan.msdds.service.MedicationService;
 import javax.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,7 +26,7 @@ public class MedicationController extends BaseController {
   @ResponseBody
   @PostMapping(value = "/")
   public ResponseEntity<ResponseDto> create(@Valid @RequestBody MedicationDto medication) {
-    ResponseDto response = medicationService.addMedication(medication);
+    ResponseDto response = medicationService.create(medication);
     if (response.getStatus() != 0) {
       return ResponseEntity.badRequest().body(response);
     }
@@ -33,9 +34,9 @@ public class MedicationController extends BaseController {
   }
 
   @ResponseBody
-  @DeleteMapping(value = "/")
-  public ResponseEntity<ResponseDto> delete(@Valid @RequestBody MedicationDto medication) {
-    ResponseDto response = medicationService.deleteMedication(medication);
+  @DeleteMapping(value = "/{code}")
+  public ResponseEntity<ResponseDto> delete(@PathVariable String code) {
+    ResponseDto response = medicationService.delete(code);
     if (response.getStatus() != 0) {
       return ResponseEntity.badRequest().body(response);
     }

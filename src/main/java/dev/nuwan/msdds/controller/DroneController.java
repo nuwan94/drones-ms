@@ -27,7 +27,7 @@ public class DroneController extends BaseController {
   @ResponseBody
   @PostMapping(value = "/register", produces = "application/json", consumes = "application/json")
   public ResponseEntity<ResponseDto> register(@Valid @RequestBody DroneDto drone) {
-    ResponseDto response = droneService.registerDrone(drone);
+    ResponseDto response = droneService.register(drone);
     if (response.getStatus() != 0) {
       return ResponseEntity.badRequest().body(response);
     }
@@ -46,8 +46,8 @@ public class DroneController extends BaseController {
 
   @ResponseBody
   @GetMapping(value = "/{serialNumber}", produces = "application/json")
-  public ResponseEntity<ResponseDto> checkDrone(@PathVariable String serialNumber) {
-    ResponseDto response = droneService.checkDrone(serialNumber);
+  public ResponseEntity<ResponseDto> checkMedications(@PathVariable String serialNumber) {
+    ResponseDto response = droneService.checkMedications(serialNumber);
     if (response.getStatus() != 0) {
       return ResponseEntity.badRequest().body(response);
     }

@@ -1,5 +1,5 @@
 package dev.nuwan.msdds.constants;
 
-public class Constants {
-  public final static Double DRONE_MAX_WEIGHT_LIMIT = 500.0;
+public interface Constants {
+  Double DRONE_MAX_WEIGHT_LIMIT = 500.0;
 }
