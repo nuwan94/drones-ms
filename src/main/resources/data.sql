@@ -13,16 +13,16 @@ insert into drone_model (name) values ('Cruiserweight');
 insert into drone_model (name) values ('Heavyweight');
 
 ---------------------- Drone ----------------------
-insert into drone (battery, serial_number, weight, model_id, state_id) values (100.0, 'd100', 0.0, 1, 1);
-insert into drone (battery, serial_number, weight, model_id, state_id) values (100.0, 'd101', 0.0, 2, 2);
-insert into drone (battery, serial_number, weight, model_id, state_id) values (100.0, 'd102', 0.0, 3, 3);
-insert into drone (battery, serial_number, weight, model_id, state_id) values (100.0, 'd103', 0.0, 4, 4);
-insert into drone (battery, serial_number, weight, model_id, state_id) values (100.0, 'd104', 0.0, 1, 5);
-insert into drone (battery, serial_number, weight, model_id, state_id) values (100.0, 'd105', 0.0, 2, 6);
-insert into drone (battery, serial_number, weight, model_id, state_id) values (100.0, 'd106', 0.0, 3, 1);
-insert into drone (battery, serial_number, weight, model_id, state_id) values (100.0, 'd107', 0.0, 4, 2);
-insert into drone (battery, serial_number, weight, model_id, state_id) values (100.0, 'd108', 0.0, 1, 3);
-insert into drone (battery, serial_number, weight, model_id, state_id) values (100.0, 'd109', 0.0, 2, 4);
+insert into drone (battery, serial_number, weight, model_id, state_id) values (100.0, 'D101010', 0.0, 1, 1);
+insert into drone (battery, serial_number, weight, model_id, state_id) values (100.0, 'D101011', 0.0, 2, 2);
+insert into drone (battery, serial_number, weight, model_id, state_id) values (100.0, 'D101012', 0.0, 3, 3);
+insert into drone (battery, serial_number, weight, model_id, state_id) values (100.0, 'D101013', 0.0, 4, 4);
+insert into drone (battery, serial_number, weight, model_id, state_id) values (100.0, 'D101014', 0.0, 1, 5);
+insert into drone (battery, serial_number, weight, model_id, state_id) values (100.0, 'D101015', 0.0, 2, 6);
+insert into drone (battery, serial_number, weight, model_id, state_id) values (100.0, 'D101016', 0.0, 3, 1);
+insert into drone (battery, serial_number, weight, model_id, state_id) values (100.0, 'D101017', 0.0, 4, 2);
+insert into drone (battery, serial_number, weight, model_id, state_id) values (100.0, 'D101018', 0.0, 1, 3);
+insert into drone (battery, serial_number, weight, model_id, state_id) values (100.0, 'D101019', 0.0, 2, 4);
 
 ---------------------- Medication ----------------------
 insert into medication (name, weight, code, image) values ('Atorvastatin', 100.0, 'ZYOOZK', 'atorvastatin.jpeg');

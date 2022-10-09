@@ -1,11 +1,13 @@
 package dev.nuwan.msdds.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
@@ -23,7 +25,8 @@ public class DroneState {
 
   private String name;
 
-  @OneToOne(mappedBy = "state")
-  private Drone drone;
+  @JsonIgnore
+  @OneToMany(mappedBy = "state")
+  private Set<Drone> drone;
 
 }
