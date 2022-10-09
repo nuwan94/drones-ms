@@ -24,7 +24,8 @@ public class MedicationController extends BaseController {
 
   @ResponseBody
   @PostMapping(value = "/")
-  public ResponseEntity<ResponseDto> create(@Valid @RequestBody MedicationDto medication) {
+  public ResponseEntity<ResponseDto>
+  create(@Valid @RequestBody MedicationDto medication) {
     ResponseDto response = medicationService.addMedication(medication);
     if (response.getStatus() != 0) {
       return ResponseEntity.badRequest().body(response);
@@ -34,12 +35,12 @@ public class MedicationController extends BaseController {
 
   @ResponseBody
   @DeleteMapping(value = "/")
-  public ResponseEntity<ResponseDto> delete(@Valid @RequestBody MedicationDto medication) {
+  public ResponseEntity<ResponseDto>
+  delete(@Valid @RequestBody MedicationDto medication) {
     ResponseDto response = medicationService.deleteMedication(medication);
     if (response.getStatus() != 0) {
       return ResponseEntity.badRequest().body(response);
     }
     return ResponseEntity.ok(response);
   }
-
 }

@@ -8,7 +8,4 @@ public interface MedicationRepository extends JpaRepository<Medication, Long> {
   Medication findByCode(String code);
 
   long deleteByCode(String code);
-
-
-
 }

@@ -15,16 +15,17 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class MedicationDto {
 
-  @JsonIgnore
-  private Long id;
+  @JsonIgnore private Long id;
 
-  @ApiModelProperty(notes = "Medication Name", example = "Penadol-9mg", required = true)
+  @ApiModelProperty(notes = "Medication Name", example = "Penadol-9mg",
+                    required = true)
   @Pattern(regexp = "^[a-zA-Z0-9-_]+$")
   private String name;
 
   private Double weight;
 
-  @ApiModelProperty(notes = "Medication Code", example = "ABCD_99", required = true)
+  @ApiModelProperty(notes = "Medication Code", example = "ABCD_99",
+                    required = true)
   @Pattern(regexp = "^[A-Z0-9_]+$")
   private String code;
 

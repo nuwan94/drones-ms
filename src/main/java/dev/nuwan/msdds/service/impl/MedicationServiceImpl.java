@@ -16,9 +16,7 @@ import org.springframework.stereotype.Service;
 @Transactional
 public class MedicationServiceImpl implements MedicationService {
 
-  @Autowired
-  MedicationRepository medicationRepository;
-
+  @Autowired MedicationRepository medicationRepository;
 
   private Medication checkIfExists(MedicationDto medicationDto) {
     return medicationRepository.findByCode(medicationDto.getCode());
@@ -33,7 +31,8 @@ public class MedicationServiceImpl implements MedicationService {
           .message(Messages.MEDICATION_EXISTS)
           .build();
     }
-    Medication savedMedication = medicationRepository.save(medicationDto.toEntity());
+    Medication savedMedication =
+        medicationRepository.save(medicationDto.toEntity());
     JSONObject jsonObject = new JSONObject();
     jsonObject.put("medication", savedMedication);
     return ResponseDto.builder()
@@ -51,14 +50,15 @@ public class MedicationServiceImpl implements MedicationService {
           .message(Messages.MEDICATION_NOT_EXISTS)
           .build();
     }
-    long deletedCount = medicationRepository.deleteByCode(medicationDto.getCode());
+    long deletedCount =
+        medicationRepository.deleteByCode(medicationDto.getCode());
     if (deletedCount > 0) {
-
     }
     JSONObject jsonObject = new JSONObject();
     return ResponseDto.builder()
         .status(StatusCodes.SUCCESS)
         .message(Messages.MEDICATION_DELETED)
-        .data(jsonObject).build();
+        .data(jsonObject)
+        .build();
   }
 }

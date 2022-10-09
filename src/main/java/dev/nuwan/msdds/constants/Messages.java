@@ -6,8 +6,9 @@ public class Messages {
   public static final String DRONE_INVALID_MODEL = "Invalid drone model";
 
   public static final String MEDICATION_SAVED = "Medication saved successfully";
-  public static final String MEDICATION_DELETED = "Medication deleted successfully";
+  public static final String MEDICATION_DELETED =
+      "Medication deleted successfully";
   public static final String MEDICATION_EXISTS = "Medication exists";
-  public static final String MEDICATION_NOT_EXISTS = "Medication doesn't exists";
-
+  public static final String MEDICATION_NOT_EXISTS =
+      "Medication doesn't exists";
 }
