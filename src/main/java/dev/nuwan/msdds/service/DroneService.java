@@ -13,4 +13,6 @@ public interface DroneService {
   ResponseDto checkMedications(String serialNumber);
 
   ResponseDto checkAvailable();
+
+  ResponseDto checkBattery(String serialNumber);
 }

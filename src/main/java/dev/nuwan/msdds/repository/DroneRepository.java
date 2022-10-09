@@ -13,6 +13,9 @@ public interface DroneRepository extends JpaRepository<Drone, Long> {
   @Query("select d.medications from Drone d where d.serialNumber = ?1")
   List<Medication> findMedicationsBySerialNumber(String serialNumber);
 
+  @Query("select d.battery from Drone d where d.serialNumber = ?1")
+  Double findBatteryBySerialNumber(String serialNumber);
+
   List<Drone> findByWeightLessThanAndBatteryGreaterThan(Double weight, Double battery);
 
 }

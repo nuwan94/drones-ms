@@ -45,9 +45,19 @@ public class DroneController extends BaseController {
   }
 
   @ResponseBody
-  @GetMapping(value = "/check/{serialNumber}", produces = "application/json")
+  @GetMapping(value = "/check/medication/{serialNumber}", produces = "application/json")
   public ResponseEntity<ResponseDto> checkMedications(@PathVariable String serialNumber) {
     ResponseDto response = droneService.checkMedications(serialNumber);
+    if (response.getStatus() != 0) {
+      return ResponseEntity.badRequest().body(response);
+    }
+    return ResponseEntity.ok(response);
+  }
+
+  @ResponseBody
+  @GetMapping(value = "/check/battery/{serialNumber}", produces = "application/json")
+  public ResponseEntity<ResponseDto> checkBattery(@PathVariable String serialNumber) {
+    ResponseDto response = droneService.checkBattery(serialNumber);
     if (response.getStatus() != 0) {
       return ResponseEntity.badRequest().body(response);
     }
