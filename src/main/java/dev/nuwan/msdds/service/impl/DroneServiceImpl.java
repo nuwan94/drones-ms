@@ -18,9 +18,13 @@ import dev.nuwan.msdds.service.DroneService;
 import java.util.ArrayList;
 import java.util.List;
 import javax.validation.Valid;
+import lombok.extern.apachecommons.CommonsLog;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 @Service
+@Slf4j
+@CommonsLog
 public class DroneServiceImpl implements DroneService {
 
   final
@@ -44,6 +48,7 @@ public class DroneServiceImpl implements DroneService {
   public ResponseDto register(@Valid DroneDto requestDrone) {
     Drone droneExist = droneRepository.findBySerialNumber(requestDrone.getSerialNo());
     if (droneExist != null) {
+      log.error("Drone with serial number " + requestDrone.getSerialNo() + " already exist.");
       return ResponseDto.builder()
           .status(StatusCodes.DUPLICATE)
           .message(Messages.DRONE_EXISTS)
@@ -51,6 +56,7 @@ public class DroneServiceImpl implements DroneService {
     }
     DroneModel droneModel = droneModelRepository.findByName(requestDrone.getModel());
     if (droneModel == null) {
+      log.error("Drone model " + requestDrone.getModel() + " is invalid.");
       return ResponseDto.builder()
           .status(StatusCodes.INVALID)
           .message(Messages.DRONE_INVALID_MODEL)
@@ -58,6 +64,7 @@ public class DroneServiceImpl implements DroneService {
     }
     DroneState droneState = droneStateRepository.findByName(requestDrone.getState());
     if (droneState == null) {
+      log.error("Drone state " + requestDrone.getState() + " is invalid.");
       return ResponseDto.builder()
           .status(StatusCodes.INVALID)
           .message(Messages.DRONE_INVALID_STATE)
@@ -71,6 +78,7 @@ public class DroneServiceImpl implements DroneService {
         .weight(0.0)
         .build();
     Drone savedDrone = droneRepository.save(drone);
+    log.info("Drone with serial number " + requestDrone.getSerialNo() + " saved successfully");
     return ResponseDto.builder()
         .status(StatusCodes.SUCCESS)
         .message(Messages.DRONE_REGISTERED)
