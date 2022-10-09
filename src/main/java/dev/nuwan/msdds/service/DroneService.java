@@ -11,4 +11,6 @@ public interface DroneService {
   ResponseDto loadMedication(DroneLoadDto droneLoadDto);
 
   ResponseDto checkMedications(String serialNumber);
+
+  ResponseDto checkAvailable();
 }
