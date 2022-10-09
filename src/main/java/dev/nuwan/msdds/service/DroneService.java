@@ -6,9 +6,9 @@ import dev.nuwan.msdds.dto.ResponseDto;
 
 public interface DroneService {
 
-  ResponseDto registerDrone(DroneDto drone);
+  ResponseDto register(DroneDto drone);
 
   ResponseDto loadMedication(DroneLoadDto droneLoadDto);
 
-  ResponseDto checkDrone(String serialNumber);
+  ResponseDto checkMedications(String serialNumber);
 }

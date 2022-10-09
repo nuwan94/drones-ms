@@ -8,30 +8,40 @@ import dev.nuwan.msdds.dto.DroneLoadDto;
 import dev.nuwan.msdds.dto.ResponseDto;
 import dev.nuwan.msdds.model.Drone;
 import dev.nuwan.msdds.model.DroneModel;
+import dev.nuwan.msdds.model.DroneState;
 import dev.nuwan.msdds.model.Medication;
 import dev.nuwan.msdds.repository.DroneModelRepository;
 import dev.nuwan.msdds.repository.DroneRepository;
+import dev.nuwan.msdds.repository.DroneStateRepository;
 import dev.nuwan.msdds.repository.MedicationRepository;
 import dev.nuwan.msdds.service.DroneService;
 import java.util.ArrayList;
 import java.util.List;
 import javax.validation.Valid;
-import org.json.JSONObject;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class DroneServiceImpl implements DroneService {
 
-  @Autowired
+  final
   DroneRepository droneRepository;
-  @Autowired
+  final
   DroneModelRepository droneModelRepository;
-  @Autowired
+  DroneStateRepository droneStateRepository;
+  final
   MedicationRepository medicationRepository;
 
+  public DroneServiceImpl(DroneRepository droneRepository,
+      DroneModelRepository droneModelRepository, DroneStateRepository droneStateRepository,
+      MedicationRepository medicationRepository) {
+    this.droneRepository = droneRepository;
+    this.droneModelRepository = droneModelRepository;
+    this.droneStateRepository = droneStateRepository;
+    this.medicationRepository = medicationRepository;
+  }
+
   @Override
-  public ResponseDto registerDrone(@Valid DroneDto requestDrone) {
+  public ResponseDto register(@Valid DroneDto requestDrone) {
     Drone droneExist = droneRepository.findBySerialNumber(requestDrone.getSerialNo());
     if (droneExist != null) {
       return ResponseDto.builder()
@@ -46,18 +56,25 @@ public class DroneServiceImpl implements DroneService {
           .message(Messages.DRONE_INVALID_MODEL)
           .build();
     }
+    DroneState droneState = droneStateRepository.findByName(requestDrone.getState());
+    if (droneState == null) {
+      return ResponseDto.builder()
+          .status(StatusCodes.INVALID)
+          .message(Messages.DRONE_INVALID_STATE)
+          .build();
+    }
     Drone drone = Drone.builder()
         .serialNumber(requestDrone.getSerialNo())
         .model(droneModel)
         .battery(requestDrone.getBattery().doubleValue())
+        .state(droneState)
+        .weight(0.0)
         .build();
     Drone savedDrone = droneRepository.save(drone);
-    JSONObject jsonObject = new JSONObject();
-    jsonObject.put("drone", savedDrone);
     return ResponseDto.builder()
         .status(StatusCodes.SUCCESS)
         .message(Messages.DRONE_REGISTERED)
-        .data(jsonObject).build();
+        .data(savedDrone).build();
   }
 
   @Override
@@ -81,7 +98,8 @@ public class DroneServiceImpl implements DroneService {
 
     // Check for weight limit
     if (!canLoad(droneExist, medicationExist)) {
-      return ResponseDto.builder().status(StatusCodes.FAILURE)
+      return ResponseDto.builder()
+          .status(StatusCodes.FAILURE)
           .message(Messages.DRONE_WEIGHT_LIMIT_EXCEED)
           .build();
     }
@@ -93,32 +111,31 @@ public class DroneServiceImpl implements DroneService {
     droneExist.setWeight(droneExist.getWeight() + medicationExist.getWeight());
 
     // Update DB
-    Drone savedDrone = droneRepository.save(droneExist);
+    droneRepository.save(droneExist);
 
-    JSONObject jsonObject = new JSONObject();
-    jsonObject.put("drone", savedDrone);
-    return ResponseDto.builder().status(StatusCodes.SUCCESS)
+    return ResponseDto.builder()
+        .status(StatusCodes.SUCCESS)
         .message(Messages.DRONE_LOADED_SUCCESSFULLY)
-        .data(jsonObject).build();
+        .build();
   }
 
   @Override
-  public ResponseDto checkDrone(String serialNumber) {
-    Drone drone = droneRepository.findBySerialNumber(serialNumber);
-    if (drone == null) {
+  public ResponseDto checkMedications(String serialNumber) {
+    List<Medication> medications = droneRepository.findMedicationsBySerialNumber(serialNumber);
+    if (medications == null) {
       return ResponseDto.builder()
           .status(StatusCodes.NOT_FOUND)
           .message(Messages.DRONE_NOT_EXISTS)
           .build();
     }
-    JSONObject jsonObject = new JSONObject();
-    jsonObject.put("drone", drone);
-    return ResponseDto.builder().status(StatusCodes.SUCCESS)
+
+    return ResponseDto.builder()
+        .status(StatusCodes.SUCCESS)
         .message(Messages.DRONE_FOUND)
-        .data(jsonObject).build();
+        .data(medications).build();
   }
 
   private boolean canLoad(Drone drone, Medication medication) {
-    return !(drone.getWeight() + medication.getWeight() > Constants.DRONE_MAX_WEIGHT_LIMIT);
+    return drone.getWeight() + medication.getWeight() <= Constants.DRONE_MAX_WEIGHT_LIMIT;
   }
 }

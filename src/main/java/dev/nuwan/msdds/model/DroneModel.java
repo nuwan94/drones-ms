@@ -1,7 +1,7 @@
 package dev.nuwan.msdds.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import java.util.Set;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -27,10 +27,11 @@ public class DroneModel {
   @Column(name = "model_id")
   private Long id;
 
+  @Column(unique = true)
   private String name;
 
   @JsonIgnore
   @OneToMany(mappedBy = "model")
-  private Set<Drone> drones;
+  private List<Drone> drones;
 
 }

@@ -2,7 +2,8 @@ package dev.nuwan.msdds.model;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
-import java.util.Collection;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -36,6 +37,7 @@ public class Drone {
   @NotBlank
   private String serialNumber;
 
+  @Column(columnDefinition = "integer default 25")
   private Double weight;
 
   private Double battery;
@@ -48,11 +50,12 @@ public class Drone {
   @JoinColumn(name = "state_id")
   private DroneState state;
 
+  @JsonIgnore
   @ManyToMany(cascade = CascadeType.ALL)
   @JoinTable(
       name = "drone_medications",
       joinColumns = @JoinColumn(name = "drone_id"),
       inverseJoinColumns = @JoinColumn(name = "medication_id")
   )
-  private Collection<Medication> medications;
+  private List<Medication> medications;
 }

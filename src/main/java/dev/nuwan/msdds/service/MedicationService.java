@@ -5,7 +5,7 @@ import dev.nuwan.msdds.dto.ResponseDto;
 
 public interface MedicationService {
 
-  ResponseDto addMedication(MedicationDto medication);
+  ResponseDto create(MedicationDto medication);
 
-  ResponseDto deleteMedication(MedicationDto medication);
+  ResponseDto delete(String code);
 }
