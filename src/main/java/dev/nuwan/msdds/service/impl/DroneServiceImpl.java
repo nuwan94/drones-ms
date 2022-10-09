@@ -147,6 +147,22 @@ public class DroneServiceImpl implements DroneService {
         .data(dronesList).build();
   }
 
+  @Override
+  public ResponseDto checkBattery(String serialNumber) {
+    Double battery = droneRepository.findBatteryBySerialNumber(serialNumber);
+    if (battery == null) {
+      return ResponseDto.builder()
+          .status(StatusCodes.NOT_FOUND)
+          .message(Messages.DRONE_NOT_EXISTS)
+          .build();
+    }
+
+    return ResponseDto.builder()
+        .status(StatusCodes.SUCCESS)
+        .message(Messages.DRONE_FOUND)
+        .data(battery).build();
+  }
+
   private boolean canLoad(Drone drone, Medication medication) {
     return drone.getWeight() + medication.getWeight() <= Constants.DRONE_MAX_WEIGHT_LIMIT;
   }
