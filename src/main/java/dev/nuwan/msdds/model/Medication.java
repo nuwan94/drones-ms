@@ -36,8 +36,7 @@ public class Medication {
 
   private String image;
 
-  @ManyToMany(mappedBy = "medications")
-  private Collection<Drone> drones;
+  @ManyToMany(mappedBy = "medications") private Collection<Drone> drones;
 
   public MedicationDto toDto() {
     return MedicationDto.builder()
@@ -48,5 +47,4 @@ public class Medication {
         .image(image)
         .build();
   }
-
 }
