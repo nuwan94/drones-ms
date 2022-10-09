@@ -1,5 +1,9 @@
 package dev.nuwan.msdds.constants;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class Messages {
 
   public static final String DRONE_REGISTERED = "Drone registered successfully";
