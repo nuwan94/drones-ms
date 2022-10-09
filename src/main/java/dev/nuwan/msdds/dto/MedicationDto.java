@@ -20,14 +20,14 @@ public class MedicationDto implements Serializable {
   private Long id;
 
   @ApiModelProperty(notes = "Medication Name", example = "Medication_Name-01", required = true)
-  @Pattern(regexp = "^[a-zA-Z0-9-_]+$")
+  @Pattern(regexp = "^[a-zA-Z0-9-_]+$", message = "Allowed only letters, numbers, '-', '_'")
   private String name;
 
   @ApiModelProperty(notes = "Medication Weight", example = "100.0", required = true)
   private Double weight;
 
   @ApiModelProperty(notes = "Medication Code", example = "CODE99", required = true)
-  @Pattern(regexp = "^[A-Z0-9_]+$")
+  @Pattern(regexp = "^[A-Z0-9_]+$", message = "Allowed only upper case letters, underscore and numbers")
   private String code;
 
   @ApiModelProperty(notes = "Picture of the Medication Case", example = "medication.jpg", required = true)
