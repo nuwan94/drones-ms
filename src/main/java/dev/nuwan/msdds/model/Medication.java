@@ -2,6 +2,7 @@ package dev.nuwan.msdds.model;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
+import dev.nuwan.msdds.dto.MedicationDto;
 import java.util.Collection;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -33,5 +34,15 @@ public class Medication {
 
   @ManyToMany(mappedBy = "medications")
   private Collection<Drone> drones;
+
+  public MedicationDto toDto() {
+    return MedicationDto.builder()
+        .id(id)
+        .name(name)
+        .weight(weight)
+        .code(code)
+        .image(image)
+        .build();
+  }
 
 }
