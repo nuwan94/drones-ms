@@ -10,7 +10,7 @@ import dev.nuwan.msdds.repository.DroneModelRepository;
 import dev.nuwan.msdds.repository.DroneRepository;
 import dev.nuwan.msdds.service.DroneService;
 import javax.validation.Valid;
-import org.json.simple.JSONObject;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
