@@ -1,6 +1,5 @@
 package dev.nuwan.msdds.dto;
 
-import java.io.Serializable;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ResponseDto implements Serializable {
+public class ResponseDto {
 
   private Integer status;
   private String message;
