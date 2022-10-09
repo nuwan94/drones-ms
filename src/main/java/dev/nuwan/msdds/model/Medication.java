@@ -8,7 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
@@ -24,12 +23,10 @@ public class Medication {
   @Column(name = "medication_id")
   private Long id;
 
-  @Pattern(regexp = "^[a-zA-Z0-9-_]+$")
   private String name;
 
   private Double weight;
 
-  @Pattern(regexp = "^[A-Z0-9_]+$")
   private String code;
 
   private String image;
