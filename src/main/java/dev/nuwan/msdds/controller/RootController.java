@@ -2,7 +2,7 @@ package dev.nuwan.msdds.controller;
 
 import java.io.IOException;
 import javax.servlet.http.HttpServletResponse;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import springfox.documentation.annotations.ApiIgnore;
 
@@ -10,7 +10,7 @@ import springfox.documentation.annotations.ApiIgnore;
 public class RootController {
 
   @ApiIgnore
-  @RequestMapping(value = "/")
+  @GetMapping(value = "/")
   public void redirect(HttpServletResponse response) throws IOException {
     response.sendRedirect("/swagger-ui/index.html");
   }

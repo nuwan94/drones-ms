@@ -1,13 +1,13 @@
 package dev.nuwan.msdds.dto;
 
-import dev.nuwan.msdds.base.ValidationTest;
+import dev.nuwan.msdds.base.ValidationBase;
 import java.util.Set;
 import javax.validation.ConstraintViolation;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class DroneDtoTest extends ValidationTest {
+class DroneDtoTest extends ValidationBase {
 
   @Test
   void testSerialNumberLengthValidations() {
