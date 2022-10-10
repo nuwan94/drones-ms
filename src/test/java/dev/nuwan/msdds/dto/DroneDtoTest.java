@@ -1,4 +1,4 @@
-package dev.nuwan.msdds.model;
+package dev.nuwan.msdds.dto;
 
 import dev.nuwan.msdds.base.ValidationTest;
 import java.util.Set;
@@ -7,27 +7,22 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class DroneTest extends ValidationTest {
-
-  private final Long testDataId = 1L;
+public class DroneDtoTest extends ValidationTest {
 
   @Test
   void testSerialNumberLengthValidations() {
     int testDataSerialNumberLength = 101;
-    Drone drone = new Drone.DroneBuilder()
-        .id(testDataId)
-        .serialNumber(RandomStringUtils.random(testDataSerialNumberLength))
+    DroneDto droneDto = DroneDto.builder()
+        .serialNo(RandomStringUtils.random(testDataSerialNumberLength))
         .build();
-    Set<ConstraintViolation<Drone>> violations = validator.validate(drone);
+    Set<ConstraintViolation<DroneDto>> violations = validator.validate(droneDto);
     Assertions.assertFalse(violations.isEmpty());
   }
 
   @Test
   void testSerialNullValidations() {
-    Drone drone = new Drone.DroneBuilder()
-        .id(testDataId)
-        .build();
-    Set<ConstraintViolation<Drone>> violations = validator.validate(drone);
+    DroneDto droneDto = DroneDto.builder().build();
+    Set<ConstraintViolation<DroneDto>> violations = validator.validate(droneDto);
     Assertions.assertFalse(violations.isEmpty());
   }
 

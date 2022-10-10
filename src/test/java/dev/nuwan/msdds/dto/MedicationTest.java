@@ -1,4 +1,4 @@
-package dev.nuwan.msdds.model;
+package dev.nuwan.msdds.dto;
 
 import dev.nuwan.msdds.base.ValidationTest;
 import java.util.Set;
@@ -8,29 +8,26 @@ import org.junit.jupiter.api.Test;
 
 public class MedicationTest extends ValidationTest {
 
-  private final Long testDataId = 1L;
-  private Set<ConstraintViolation<Medication>> violations;
-  private Medication medication;
+  private Set<ConstraintViolation<MedicationDto>> violations;
+  private MedicationDto medicationDto;
 
   @Test
   void testNamePatternValidations() {
     String invalidNamePattern = "medicine*1";
-    medication = new Medication.MedicationBuilder()
-        .id(testDataId)
+    medicationDto = MedicationDto.builder()
         .name(invalidNamePattern)
         .build();
-    violations = validator.validate(medication);
+    violations = validator.validate(medicationDto);
     Assertions.assertFalse(violations.isEmpty());
   }
 
   @Test
   void testCodePatternValidations() {
     String invalidCodePattern = "cDA1";
-    medication = new Medication.MedicationBuilder()
-        .id(testDataId)
+    medicationDto = MedicationDto.builder()
         .code(invalidCodePattern)
         .build();
-    violations = validator.validate(medication);
+    violations = validator.validate(medicationDto);
     Assertions.assertFalse(violations.isEmpty());
   }
 
