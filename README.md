@@ -23,6 +23,23 @@ Drones Delivery System - Musala Soft
 To run this project, you will need to add the following environment variables to your `application.properties` file
 
 ```
+msdds.titte=
+msdds.description=
+msdds.version=
+
+spring.h2.console.enabled=
+spring.h2.console.path=
+
+spring.datasource.url=
+spring.datasource.driverClassName=
+spring.datasource.username=
+spring.datasource.password=
+
+spring.jpa.database-platform=o
+spring.jpa.defer-datasource-initialization=
+
+logging.level.root=
+logging.level.dev.nuwan=
 ```
 
 
