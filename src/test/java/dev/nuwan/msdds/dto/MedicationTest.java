@@ -1,12 +1,12 @@
 package dev.nuwan.msdds.dto;
 
-import dev.nuwan.msdds.base.ValidationTest;
+import dev.nuwan.msdds.base.ValidationBase;
 import java.util.Set;
 import javax.validation.ConstraintViolation;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class MedicationTest extends ValidationTest {
+class MedicationTest extends ValidationBase {
 
   private Set<ConstraintViolation<MedicationDto>> violations;
   private MedicationDto medicationDto;
